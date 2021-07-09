@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}Bots {{ bots_environment_text }} {{ bots_http_path }}{% endblock %}
+
+{% block extrahead %}
+<link rel="icon" type="image/png" href="{% static "images/favicon.ico" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/bots.css" %}">
+{% endblock %}
+
+{% block branding %}
+{% include botslogo %}
+{% include "bots/menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div id="environment">
+  <div style="color:{{ bots_environment_text_color }}">{{ bots_environment_text }}</div>
+</div>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs"></div>
+{% endblock %}
+
+{% block userlinks %}
+{% endblock %}

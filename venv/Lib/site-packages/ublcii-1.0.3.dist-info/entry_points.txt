@@ -1,0 +1,5 @@
+[console_scripts]
+cii2ubl = ublcii.translate:cii2ubl
+ubl2cii = ublcii.translate:ubl2cii
+ublcii-clean = ublcii:clean
+

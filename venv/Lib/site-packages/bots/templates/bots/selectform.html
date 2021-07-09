@@ -1,0 +1,75 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+<!-- 2019.05.03 LWA - Replace datetimepicker widget with this nice one:
+	https://github.com/xdan/datetimepicker
+-->
+{% block extrahead %}
+<link rel="stylesheet" type="text/css" href="{% static "css/bots.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/jquery.datetimepicker.min.css" %}">
+<script src="{% static "admin/js/vendor/jquery/jquery.min.js" %}"></script>
+<script src="{% static "js/jquery.datetimepicker.full.min.js" %}"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#id_datefrom").datetimepicker({
+            format: 'Y-m-d H:i:s',
+            formatDate: 'Y-m-d',
+            formatTime: 'H:i',
+            step: 15,
+            yearStart: '{{ bots_mindate|date:"%Y" }}',
+            yearEnd: '{{ bots_maxdate|date:"%Y" }}',
+            minDate: '{{ bots_mindate|date:"Y-m-d" }}',
+            maxDate: '{{ bots_maxdate|date:"Y-m-d" }}',
+            //dayOfWeekStart: 1,
+            //roundTime: 'round',
+            //roundTime: 'floor',
+            closeOnDateSelect: true,
+            onShow: function(ct) {
+               this.setOptions({
+                   maxDate: jQuery('#id_dateuntil').val()?jQuery('#id_dateuntil').val():false,
+               })
+            },
+        });
+        $("#id_dateuntil").datetimepicker({
+            format: 'Y-m-d H:i:s',
+            formatDate: 'Y-m-d',
+            formatTime: 'H:i',
+            step: 15,
+            yearStart: '{{ bots_mindate|date:"%Y" }}',
+            yearEnd: '{{ bots_maxdate|date:"%Y" }}',
+            minDate: '{{ bots_mindate|date:"Y-m-d" }}',
+            maxDate: '{{ bots_maxdate|date:"Y-m-d" }}',
+            //dayOfWeekStart: 1,
+            closeOnDateSelect: true,
+            onShow: function(ct) {
+               this.setOptions({
+                   minDate: jQuery('#id_datefrom').val()?jQuery('#id_datefrom').val():false,
+               })
+            },
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<br/>
+{% if request.META.PATH_INFO == "/processes/" %}
+    <h1>Select process errors</h1>
+{% else %}
+    {% if request.META.PATH_INFO == "/confirm/" %}
+        <h1>Select confirmations</h1>
+    {% else %}
+        <h1>Select {{request.META.PATH_INFO|cut:'/'}}</h1>
+    {% endif %}
+{% endif %}
+<p>&nbsp;Make your required selections below:</p>
+<br/>
+<form action="{{ form.action }}" method="post">{% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <br/>&nbsp;
+    <p></p>
+    <input type="submit" name="fromselect" value="{% trans 'Show selection' %}" />
+</form>
+{% endblock %}

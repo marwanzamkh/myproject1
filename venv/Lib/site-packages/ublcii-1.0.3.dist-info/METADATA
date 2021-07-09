@@ -1,0 +1,86 @@
+Metadata-Version: 2.1
+Name: ublcii
+Version: 1.0.3
+Summary: Translate Invoice UBL 2.1 to/from CrossIndustryInvoice (CII) D16B
+Home-page: https://converter-ubl-cii-invoice-xml.sourceforge.io
+Author: Ludovic Watteaux
+Author-email: ludovic.watteaux@gmail.com
+License: GNU GPL v3.0
+Project-URL: Home, https://converter-ubl-cii-invoice-xml.sourceforge.io
+Project-URL: Bug Reports, https://github.com/Auratechcom/converter_ubl_cii_invoice_xml/issues
+Project-URL: Say Thanks!, http://www.auratechcom.fr/contact.htm
+Project-URL: Say Thanks2!, https://www.edi-intelligentsia.com/contact/
+Project-URL: Source, https://github.com/Auratechcom/converter_ubl_cii_invoice_xml.git
+Keywords: edi xml invoice ubl 2.1 CII CrossIndustryInvoice D16B
+Platform: OS Independent (Written in an interpreted language)
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: License :: OSI Approved :: GNU General Public License (GPL)
+Classifier: Topic :: Office/Business
+Classifier: Topic :: Office/Business :: Financial
+Classifier: Topic :: Other/Nonlisted Topic
+Classifier: Topic :: Communications
+Classifier: Environment :: Console
+Classifier: Environment :: Web Environment
+Description-Content-Type: text/markdown
+Requires-Dist: bots-ediint (>=3.3.1rc1)
+Requires-Dist: django (>=1.10)
+Requires-Dist: setuptools
+
+# UBLCII
+
+Translate Invoice UBL 2.1 to/from CrossIndustryInvoice (CII) D16B
+
+
+## Installation
+
+* Pre-required: python2 or python3
+
+```bash
+pip install ublcii
+```
+
+
+## Usages
+```bash
+ubl2cii Input-Invoice-UBL.xml Output-Invoice-CII-D16B.xml
+cii2ubl Input-Invoice-CII-D16B.xml Output-Invoice-UBL.xml
+```
+
+## Authors
+* Ludovic Watteaux (Development)
+* Claude Charmot (Specifications)
+
+
+## Support
+
+https://sourceforge.net/projects/converter-ubl-cii-invoice-xml/support
+
+
+## Changelog
+* v1.0.3 : 2019-07-29 - Fixes and Updates
+	* [CII2UBL] Fixes for /Invoice/Delivery/DeliveryLocation/ID
+	* Add xml namespaces: qdt, udt, xsi, xsi:schemaLocation
+	* [CII2UBL] Map /IncludedNote/SubjectCode in begin of /Invoice/Note
+	* Increase xml D16B ram:Content len to 1024
+	* Set minimum occurance of UBL /Invoice/InvoiceLine to 0
+* v1.0.2 : 2019-07-23 - Fixes and Updates
+	* Map field /Invoice/InvoiceLine/AllowanceCharge/ChargeIndicator
+	* Set default mandatory field ChargeIndicator to 'false'
+	* Fix /Invoice/PaymentMeans
+	* Fix /Invoice/InvoiceLine/Price/AllowanceCharge/BaseAmount
+
+* v1.0.1 : 2019-07-19 - Packaging infos updates
+* v1.0.0 : 2019-07-18 - First release on pypi
+
+
